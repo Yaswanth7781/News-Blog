@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="article-full">
+    <h1>{{ article.title }}</h1>
+    {% if article.image %}
+    <img src="{{ article.image }}" alt="{{ article.title }}" class="article-full-image" onerror="this.onerror=null;this.style.display='none';">
+    {% endif %}
+    <p class="article-meta">By {{ article.author }} | Published on {{ article.pub_date|date:"F d, Y" }}</p>
+    <div class="article-content">
+        {{ article.content|linebreaks }}
+    </div>
+    
+    {% if user == article.author %}
+    <div class="article-actions">
+        <a href="{% url 'article_edit' article.pk %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+    </div>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="back-link">&larr; Back to all articles</a>
+</div>
+{% endblock content %}

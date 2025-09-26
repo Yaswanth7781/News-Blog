@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Latest News</h1>
+    </div>
+
+    <div class="article-list">
+        {% for article in articles %}
+            <div class="article-card">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" alt="{{ article.title }}" class="article-image" onerror="this.style.display='none'">
+                {% endif %}
+                <div class="article-content">
+                    <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
+                    <p class="article-meta">by {{ article.author }} on {{ article.pub_date|date:"F d, Y" }}</p>
+                    <p>{{ article.content|truncatewords:30 }}</p>
+                    {% if user == article.author %}
+                        <div class="article-actions">
+                            <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit</a>
+                            <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% empty %}
+            <div class="empty-state">
+                <h2>Welcome to Django News!</h2>
+                {% if user.is_authenticated and 'Authors' in user.groups.all|join:", " %}
+                    <p>The page is looking a little empty. Why not <a href="{% url 'article_new' %}">post the first article</a>?</p>
+                {% else %}
+                    <p>There are no articles to display right now. Please check back soon for the latest updates!</p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}
