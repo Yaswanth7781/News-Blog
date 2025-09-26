@@ -134,7 +134,7 @@ The selected user will now see the "New Post" button and will be able to create,
 
 Contributing
 Contributions are welcome! If you have suggestions for improving the project, please fork the repository and create a pull request, or open an issue with the "enhancement" tag.
-
+View in code so you will get clear structure
 File Structure
 .
 ├── manage.py                 # Django's main command-line utility.
