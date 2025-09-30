@@ -14,8 +14,8 @@
             <a class="navbar-brand" href="{% url 'home' %}">PYR News</a>
             <div class="nav-links">
                 {% if user.is_authenticated %}
-                    {# This block now checks if the user is in the "Authors" group #}
-                    {% if 'Authors' in user.groups.all|join:", " %}
+                    {# This block now checks if the user is a superuser #}
+                    {% if user.is_superuser %}
                         <a href="{% url 'article_new' %}">New Post</a>
                     {% endif %}
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
@@ -41,3 +41,4 @@
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+

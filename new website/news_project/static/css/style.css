@@ -1,26 +1,26 @@
-/* General Body Styles */
+/* General Body and Typography */
 body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
-    background-color: #f4f4f9;
+    background-color: #f8f9fa;
     color: #333;
-    line-height: 1.6;
 }
 
 .container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
 }
 
-/* Navbar */
+/* Navigation Bar */
 .navbar {
-    background: #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    padding: 1rem 0;
+    background-color: #fff;
+    border-bottom: 1px solid #e7e7e7;
+    padding: 15px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
 .navbar .container {
@@ -30,160 +30,181 @@ body {
 }
 
 .navbar-brand {
+    font-size: 1.8rem;
     font-weight: 700;
-    font-size: 1.5rem;
-    color: #333;
     text-decoration: none;
+    color: #007bff;
 }
 
 .nav-links a, .nav-link-button {
     color: #555;
     text-decoration: none;
-    margin-left: 15px;
+    margin-left: 20px;
     font-size: 1rem;
     padding: 8px 12px;
     border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: all 0.3s ease;
 }
 
 .nav-links a:hover {
-    background-color: #007bff;
-    color: #fff;
+    background-color: #f2f2f2;
+    color: #000;
 }
 
 .nav-link-button {
     background: none;
     border: none;
     cursor: pointer;
-    font-family: inherit;
+    font-family: 'Roboto', sans-serif;
 }
 
 .nav-link-button:hover {
-    background-color: #dc3545;
-    color: white;
+    background-color: #f2f2f2;
+    color: #000;
 }
 
 
-/* Main Content */
-main.container {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-/* Hero Header */
-.hero {
+/* Page Header */
+.page-header {
     text-align: center;
-    padding: 40px 20px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 8px;
     margin-bottom: 40px;
 }
-.hero h1 {
-    margin: 0;
-    font-size: 2.8rem;
+
+/* Search Container Styles */
+.search-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
-/* Article Grid */
+.search-container form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-container input[type="text"] {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.search-container input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+
+/* Article Grid Layout */
 .article-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* This is the main link wrapper for each card */
+.article-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block; /* Makes the link fill the grid area */
 }
 
 .article-card {
-    background: #fff;
+    position: relative; /* Crucial for positioning the text overlay */
+    background-color: #222; /* Fallback background */
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     overflow: hidden;
-    transition: transform 0.3s, box-shadow 0.3s;
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    height: 250px; /* Give cards a consistent height */
 }
 
 .article-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
 }
 
 .article-image {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
 }
 
-.article-card-content {
+.article-card:hover .article-image {
+    transform: scale(1.05); /* Slight zoom on hover */
+}
+
+/* A placeholder for articles without images */
+.article-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #333;
+}
+
+/* The text overlay */
+.article-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 100%);
+    color: #fff;
 }
 
-.article-card-content h2 a {
-    text-decoration: none;
-    color: #333;
-    font-size: 1.4rem;
+.article-content h2 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.25rem;
+    color: #fff;
 }
 
 .article-meta {
-    color: #777;
-    font-size: 0.9rem;
-    margin: 10px 0;
+    font-size: 0.85rem;
+    color: #e0e0e0;
+    margin: 0;
 }
 
-.read-more {
-    margin-top: auto;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 700;
-}
-
-/* Article Detail Page */
-.article-full {
-    background: #fff;
-    padding: 30px;
+/* Article Detail View */
+.article-detail-container {
+    background-color: #fff;
+    padding: 40px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.article-full-image {
+.article-detail-header img {
     width: 100%;
-    max-height: 450px;
+    max-height: 400px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 20px;
 }
 
-.article-content {
+.article-detail-content {
+    line-height: 1.8;
+}
+
+.article-detail-actions {
     margin-top: 20px;
-    font-size: 1.1rem;
 }
 
-.article-actions {
-    margin-top: 25px;
-    border-top: 1px solid #eee;
-    padding-top: 20px;
-}
-
-.back-link {
-    display: inline-block;
-    margin-top: 20px;
-    color: #007bff;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Forms (Login, Signup, Article) */
+/* Form and Authentication Pages */
 .form-container {
-    max-width: 600px;
+    max-width: 500px;
     margin: 40px auto;
     padding: 30px;
-    background: #fff;
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.form-container h1, .form-container h2 {
+.form-container h2 {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -192,26 +213,12 @@ main.container {
     margin-bottom: 15px;
 }
 
-.form-container label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.form-container input[type="text"],
-.form-container input[type="url"],
-.form-container input[type="password"],
-.form-container textarea {
+.form-container form input, .form-container form textarea {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box; /* Important for padding */
-}
-
-.form-container textarea {
-    min-height: 200px;
-    resize: vertical;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important */
 }
 
 .auth-switch {
@@ -219,31 +226,75 @@ main.container {
     margin-top: 20px;
 }
 
-
 /* Buttons */
 .btn {
     display: inline-block;
     padding: 10px 20px;
-    border-radius: 5px;
     text-decoration: none;
-    color: #fff;
-    border: none;
+    border-radius: 5px;
     cursor: pointer;
-    text-align: center;
+    border: none;
     font-size: 1rem;
-    margin-right: 10px;
+    text-align: center;
 }
 
-.btn-primary { background-color: #007bff; }
-.btn-danger { background-color: #dc3545; }
-.btn-success { background-color: #28a745; }
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
 
+.btn-secondary {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 50px;
+}
+
+.empty-state.full-width {
+    grid-column: 1 / -1; /* Span all columns in the grid */
+}
 
 /* Footer */
 .site-footer {
     text-align: center;
-    padding: 20px;
     margin-top: 40px;
-    background: #333;
-    color: #fff;
+    padding: 20px;
+    background-color: #e9ecef;
+    color: #6c757d;
 }
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .article-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .article-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .search-container form {
+        flex-direction: column;
+    }
+
+    .nav-links {
+        display: none; /* Simple responsive fix for now */
+    }
+}
+

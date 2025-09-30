@@ -3,9 +3,16 @@
 {% block content %}
     <div class="page-header">
         <h1>Latest News</h1>
+        <!-- Search Form -->
+        <div class="search-container">
+            <form method="get" action="{% url 'home' %}">
+                <input type="text" name="q" placeholder="Search news articles..." value="{{ search_query }}">
+                <button type="submit" class="btn">Search</button>
+            </form>
+        </div>
     </div>
 
-    <div class="article-list">
+    <div class="article-grid">
         {% for article in articles %}
             <div class="article-card">
                 {% if article.image %}
@@ -15,7 +22,7 @@
                     <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
                     <p class="article-meta">by {{ article.author }} on {{ article.pub_date|date:"F d, Y" }}</p>
                     <p>{{ article.content|truncatewords:30 }}</p>
-                    {% if user == article.author %}
+                    {% if user.is_superuser %}
                         <div class="article-actions">
                             <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit</a>
                             <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
@@ -24,12 +31,17 @@
                 </div>
             </div>
         {% empty %}
-            <div class="empty-state">
-                <h2>Welcome to Django News!</h2>
-                {% if user.is_authenticated and 'Authors' in user.groups.all|join:", " %}
-                    <p>The page is looking a little empty. Why not <a href="{% url 'article_new' %}">post the first article</a>?</p>
+            <div class="empty-state full-width">
+                {% if search_query %}
+                     <h2>No Results Found</h2>
+                    <p>Your search for "{{ search_query }}" did not match any articles. Please try a different term.</p>
                 {% else %}
-                    <p>There are no articles to display right now. Please check back soon for the latest updates!</p>
+                    <h2>Welcome to Django News!</h2>
+                    {% if user.is_superuser %}
+                        <p>The page is looking a little empty. Why not <a href="{% url 'article_new' %}">post the first article</a>?</p>
+                    {% else %}
+                        <p>There are no articles to display right now. Please check back soon for the latest updates!</p>
+                    {% endif %}
                 {% endif %}
             </div>
         {% endfor %}
