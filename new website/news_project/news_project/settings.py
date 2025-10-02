@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'news_project.wsgi.application'
 #     }
 # }
 DATABASES = {
-    'default': dj_database_url.config(default=config('postgres://yashdb:Yash@90325@localhost:5432/news_db'))
+    'default': dj_database_url.config(default=config('postgres://yashdb:PjW2lPoUXovf3tRU7ypyOMaTAwc9S7PF@localhost:5432/news_db'))
 }
 
 # Password validation
@@ -128,6 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
 
 
