@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("2+kr9$cm(4sn(_dwz(m8c$whru(pz6oi%g7#&-n*maz2c&b8eb", default="django-insecure-your-secret-key-here")
+SECRET_KEY = config("SECRET_KEY", default="django-insecure-your-secret-key-here")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=True, cast=bool)
@@ -61,9 +61,10 @@ WSGI_APPLICATION = 'news_project.wsgi.application'
 # Database
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://yashdb:PjW2lPoUXovf3tRU7ypyOMaTAwc9S7PF@localhost:5432/news_db'
+        default=config("DATABASE_URL")
     )
 }
+
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -98,4 +99,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Auth redirects
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
