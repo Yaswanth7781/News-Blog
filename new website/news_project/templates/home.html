@@ -22,7 +22,7 @@
                     <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
                     <p class="article-meta">by {{ article.author }} on {{ article.pub_date|date:"F d, Y" }}</p>
                     <p>{{ article.content|truncatewords:30 }}</p>
-                    {% if user.is_superuser %}
+                    {% if user.username == 'yaswanth' %}
                         <div class="article-actions">
                             <a href="{% url 'article_edit' article.pk %}" class="btn btn-secondary">Edit</a>
                             <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
@@ -37,7 +37,7 @@
                     <p>Your search for "{{ search_query }}" did not match any articles. Please try a different term.</p>
                 {% else %}
                     <h2>Welcome to Django News!</h2>
-                    {% if user.is_superuser %}
+                    {% if user.username == 'yaswanth' %}
                         <p>The page is looking a little empty. Why not <a href="{% url 'article_new' %}">post the first article</a>?</p>
                     {% else %}
                         <p>There are no articles to display right now. Please check back soon for the latest updates!</p>
@@ -46,4 +46,5 @@
             </div>
         {% endfor %}
     </div>
+
 {% endblock content %}
