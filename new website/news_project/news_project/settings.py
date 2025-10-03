@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # add this
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'news_project.urls'
 
@@ -81,14 +83,14 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
-STATIC_URL = "/static/"
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]  # your local static folder
+STATIC_ROOT = BASE_DIR / "staticfiles"    # collectstatic will dump here
 
-# This is required for collectstatic
-STATIC_ROOT = BASE_DIR / "staticfiles"
+# Optional: Enable WhiteNoise compression
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# Your app’s own static dir (dev use)
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
 
 # Media files (if you allow uploads)
 MEDIA_URL = "/media/"
@@ -100,6 +102,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Auth redirects
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 
 
 
