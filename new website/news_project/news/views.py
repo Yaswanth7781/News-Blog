@@ -7,9 +7,13 @@ from .models import Article
 from .forms import CustomUserCreationForm # Use the custom form
 
 # A custom mixin to check for superuser status
-class SuperuserRequiredMixin(UserPassesTestMixin):
+# A mixin to allow only a specific user
+class SpecificUserRequiredMixin(UserPassesTestMixin):
+    allowed_username = 'yaswanth'  # set the allowed username here
+
     def test_func(self):
-        return self.request.user.is_superuser
+        return self.request.user.is_authenticated and self.request.user.username == self.allowed_username
+
 
 class ArticleListView(ListView):
     model = Article
@@ -37,7 +41,7 @@ class ArticleDetailView(DetailView):
     model = Article
     template_name = 'article_detail.html'
 
-class ArticleCreateView(LoginRequiredMixin, SuperuserRequiredMixin, CreateView):
+class ArticleCreateView(LoginRequiredMixin, SpecificUserRequiredMixin, CreateView):
     model = Article
     template_name = 'article_form.html'
     fields = ['title', 'content', 'image']
@@ -46,17 +50,21 @@ class ArticleCreateView(LoginRequiredMixin, SuperuserRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class ArticleUpdateView(LoginRequiredMixin, SuperuserRequiredMixin, UpdateView):
+
+class ArticleUpdateView(LoginRequiredMixin, SpecificUserRequiredMixin, UpdateView):
     model = Article
     template_name = 'article_form.html'
     fields = ['title', 'content', 'image']
 
-class ArticleDeleteView(LoginRequiredMixin, SuperuserRequiredMixin, DeleteView):
+
+class ArticleDeleteView(LoginRequiredMixin, SpecificUserRequiredMixin, DeleteView):
     model = Article
     template_name = 'article_confirm_delete.html'
     success_url = reverse_lazy('home')
 
+
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm # Use the custom form
     success_url = reverse_lazy('login')
+
     template_name = 'registration/signup.html'
