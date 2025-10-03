@@ -15,7 +15,7 @@
             <div class="nav-links">
                 {% if user.is_authenticated %}
                     {# This block now checks if the user is a superuser #}
-                    {% if user.is_superuser %}
+                    {% if user.username == 'yaswanth' %}
                         <a href="{% url 'article_new' %}">New Post</a>
                     {% endif %}
                     <form action="{% url 'logout' %}" method="post" style="display: inline;">
@@ -41,4 +41,5 @@
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
+
 
