@@ -4,3 +4,6 @@ gunicorn
 dj-database-url
 whitenoise
 Pillow
+python-decouple
+dj-database-url
+gunicorn
