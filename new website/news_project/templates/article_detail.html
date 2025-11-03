@@ -3,22 +3,34 @@
 {% block content %}
 <div class="article-full">
     <h1>{{ article.title }}</h1>
+
     {% if article.image %}
-    <img src="{{ article.image }}" alt="{{ article.title }}" class="article-full-image" onerror="this.onerror=null;this.style.display='none';">
+    <img src="{{ article.image }}" 
+         alt="{{ article.title }}" 
+         class="article-full-image"
+         style="width:100%; max-height:400px; object-fit:cover; border-radius:10px; margin-bottom:20px;"
+         onerror="this.onerror=null;this.style.display='none';">
     {% endif %}
-    <p class="article-meta">By {{ article.author }} | Published on {{ article.pub_date|date:"F d, Y" }}</p>
-    <div class="article-content">
+
+    <p class="article-meta">
+        By <strong>{{ article.author }}</strong> | Published on {{ article.pub_date|date:"F d, Y" }}
+    </p>
+
+    <div class="article-content" style="margin-top:20px;">
         {{ article.content|linebreaks }}
     </div>
-    
+
     {% if user.username == 'yaswanth' %}
-    <div class="article-actions">
+    <div class="article-actions" style="margin-top:20px;">
         <a href="{% url 'article_edit' article.pk %}" class="btn btn-primary">Edit</a>
         <a href="{% url 'article_delete' article.pk %}" class="btn btn-danger">Delete</a>
     </div>
     {% endif %}
 
-    <a href="{% url 'home' %}" class="back-link">&larr; Back to all articles</a>
+    <a href="{% url 'home' %}" class="back-link" style="display:inline-block; margin-top:20px;">
+        &larr; Back to all articles
+    </a>
 </div>
-{% endblock content %}
+{% endblock %}
+
 
